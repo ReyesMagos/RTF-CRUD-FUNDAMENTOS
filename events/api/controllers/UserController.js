@@ -21,18 +21,26 @@ module.exports = {
         //Aqui lo que estamos haciendo es crear un objeto user para guardar
         // los datos que traemos del formulario, si alguien edita este el dato que ponga
         //no se añadira a nuestro modelo
+        var gen;
+        if(req.param('genre')& req.param('genre')==0)
+            gen = 'M';
+        else if(req.param('genre'))
+            gen='F';
         
         var userObj = {
                 name: req.param('name'),
                 lastname: req.param('lastname'),
                 age: req.param('age'),
                 email: req.param('email'),
-                genre: req.param('genre'),
+                genre: gen,
                 phone: req.param('phone'),
-                address: req.param('address')
+                address: req.param('address'), 
+                username: req.param('username'),
+                password: req.param('password'),
+                passwordConfirmation: req.param('passwordConfirmation')
             }
             
-            
+        console.log(userObj);
    
         User.create(userObj, function userCreated(err, user) {
             if (err) {
