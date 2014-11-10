@@ -1,0 +1,47 @@
+<p >&nbsp; </p>
+<p >&nbsp; </p>
+<div class="container">
+    <form role="" action="/user/create" method="POST" class="form-signin">
+
+                <% if(flash && flash.err) { %>
+                    <ul class="alert alert-success">
+                    <% Object.keys(flash.err).forEach(function(error){ %>
+                        <li> <%- JSON.stringify(flash.err[error]) %></li>
+                        <% }) %>
+                </ul>
+                <% } %>
+            <legend>Registro de usuarios</legend>
+              
+                <label for="name">Name</label>
+                <input class="form-control" name="name" placeholder="Name" required>
+                
+                 <label for="lastname">Lastname</label>
+                <input  class="form-control" name="lastname" placeholder="Lastname" required>
+               
+                 <label for="age">Age</label>
+                <input  class="form-control" name="age" type="number" placeholder="Age" min="12" max="70" required>
+              
+                <label for="email">Email</label>
+                <div class="input-group">
+
+                    <div class="input-group-addon">@</div>
+                        <input class="form-control" name="email" type="email" placeholder="Email" required>
+                </div>
+             
+                <label for="genre">Genre</label>
+                <input class="form-control" name="genre" type="number" placeholder="Genre" min="0" max="1"required>
+              
+                <label for="phone">Phone</label>
+                <input class="form-control" name="phone"type="number" placeholder="Phone"required>
+              
+                <label for="address">Address</label>
+                <input class="form-control" name="address"type="text" placeholder="Address"required>
+               
+                <label ></label>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Sign in</button>
+                    <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+                </div>
+
+    </form>
+</div>
