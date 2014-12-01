@@ -1,0 +1,52 @@
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-8 column">
+			<h3 class="text-info">
+				<%= movie.title %>
+			</h3>
+			<p class="lead"><%= movie.synopsis %></p>
+			<ol class="list-unstyled">
+				<li>
+					<p class="lead">
+						<label>Fecha Lanzamiento:</label>	
+						<%=movie.releaseDate%>
+					</p>
+				</li>
+				<li>
+					<p class="lead">
+						<label>Director:</label>	
+						<%=movie.director%>
+					</p>
+				</li>
+				<li>
+					<p class="lead">
+						<label>Pais:</label>
+						<%=movie.country%>
+					</p>
+				</li>
+				<li>
+					<p class="lead">
+						<label>Clasificacion: </label>
+						<%=movie.clasification%>
+					</p>
+				</li>
+				<li>
+					<p class="lead">
+						<label>Casting:</label>
+						<ul>
+							<% movie.casting.forEach(function(cast) {%>
+		    					<li><p class="lead"><%= cast%></p></li>		
+							<% }); %>
+						</ul>
+					</p>
+				</li>
+			</ol>
+		</div>
+		<div class="col-md-4 column">
+		<br>
+		<br>
+		<br>
+			<img alt="240x240" class="pull-right" src="http://lorempixel.com/140/140/" />
+		</div>
+	</div>
+</div>

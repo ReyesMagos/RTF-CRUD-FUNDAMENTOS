@@ -1,0 +1,74 @@
+<script>
+    $(document).ready(function() {
+        var max_fields      = 10; //maximum input boxes allowed
+        var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+        var add_button      = $("#add_field_button"); //Add button ID
+        var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+    if(x < max_fields){ //max input box allowed
+    x++; //text box increment
+    $(wrapper).append('<div><a href="#" class="pull-right" id="remove_field">Remove</a><input type="text"   class="form-control" name="casting" placeholder="Miembro del Casting"/></div>'); //add input box
+        }
+    });
+    $(wrapper).on("click","#remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+        })
+    });
+</script>
+<div class="container">
+    <form action="/movie/create/" enctype="multipart/form-data" method="POST" class="form-signin">
+        <% if(flash && flash.err) { %>
+    <ul class="alert alert-success">
+        <% Object.keys(flash.err).forEach(function(error){ %>
+        <li> <%- JSON.stringify(flash.err[error]) %></li>
+        <% }) %>
+    </ul>
+    <% } %>
+        <legend>Registro de Peliculas</legend>
+        <div class="form-group">
+            <label for="title">Titulo</label>
+            <input class="form-control" type="text" name="title" placeholder="Titulo" required>
+        </div>
+        <div class="form-group">
+            <label for="synopsis">Sinopsis</label>
+            <textarea class="form-control" name="synopsis" placeholder="Sinopsis" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="releseDate">Fecha de Estreno</label>
+            <input  class="form-control" type="date" name="releaseDate" id="releaseDate" placeholder="Fecha de Lanzamiento" required>
+        </div>
+        <div class="form-group">
+            <label for="director">Director</label>
+            <input  class="form-control" name="director" placeholder="Director" type"text"  required>
+        </div>
+        <div class="form-group">
+            <label for="country">Pais</label>
+            <input  class="form-control" name="country" type="text" placeholder="Pais" min="12" max="70" required>
+        </div>
+        <div class="form-group">
+            <label for="clasification">Clasificacion</label>
+            <input class="form-control" name="clasification" type="text" placeholder="Clasificacion" required>
+        </div>
+        <div class="form-group">
+            <label for="clasification">Casting</label>  <a href="#"  id="add_field_button" class="pull-right">Agregar</a>
+            <div class="input_fields_wrap">
+                <input type="text" name="casting"  class="form-control" placeholder="Miembro del Casting">
+            </div>
+            
+        </div>
+        <!--
+        <div class="form-group">
+            <label for="moviePoster">Casting</label>
+            <input type="file" id="moviePoster" name="moviePoster" />
+        </div>
+        -->
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Crear</button>
+            <input type="hidden" name="_csrf" value="<%=_csrf %>"/>
+        </div>
+    </form>
+    
+</div>
+</div>

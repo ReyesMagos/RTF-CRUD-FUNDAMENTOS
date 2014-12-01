@@ -9,7 +9,7 @@ module.exports = {
 
     'new': function(req, res) {
        
-        res.view('user/registerform');
+        res.view();
     },
 
 
