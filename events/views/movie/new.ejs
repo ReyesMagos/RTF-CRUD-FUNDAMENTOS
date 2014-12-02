@@ -1,30 +1,30 @@
 <script>
-    $(document).ready(function() {
-        var max_fields      = 10; //maximum input boxes allowed
-        var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-        var add_button      = $("#add_field_button"); //Add button ID
-        var x = 1; //initlal text box count
-    $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-    if(x < max_fields){ //max input box allowed
-    x++; //text box increment
-    $(wrapper).append('<div><a href="#" class="pull-right" id="remove_field">Remove</a><input type="text"   class="form-control" name="casting" placeholder="Miembro del Casting"/></div>'); //add input box
-        }
-    });
-    $(wrapper).on("click","#remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x--;
-        })
-    });
+$(document).ready(function() {
+var max_fields      = 10; //maximum input boxes allowed
+var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+var add_button      = $("#add_field_button"); //Add button ID
+var x = 1; //initlal text box count
+$(add_button).click(function(e){ //on add input button click
+e.preventDefault();
+if(x < max_fields){ //max input box allowed
+x++; //text box increment
+$(wrapper).append('<div><a href="#" class="pull-right" id="remove_field">Remove</a><input type="text"   class="form-control" name="casting" placeholder="Miembro del Casting"/></div>'); //add input box
+}
+});
+$(wrapper).on("click","#remove_field", function(e){ //user click on remove text
+e.preventDefault(); $(this).parent('div').remove(); x--;
+})
+});
 </script>
 <div class="container">
     <form action="/movie/create/" enctype="multipart/form-data" method="POST" class="form-signin">
         <% if(flash && flash.err) { %>
-    <ul class="alert alert-success">
-        <% Object.keys(flash.err).forEach(function(error){ %>
-        <li> <%- JSON.stringify(flash.err[error]) %></li>
-        <% }) %>
-    </ul>
-    <% } %>
+        <ul class="alert alert-success">
+            <% Object.keys(flash.err).forEach(function(error){ %>
+            <li> <%- JSON.stringify(flash.err[error]) %></li>
+            <% }) %>
+        </ul>
+        <% } %>
         <legend>Registro de Peliculas</legend>
         <div class="form-group">
             <label for="title">Titulo</label>

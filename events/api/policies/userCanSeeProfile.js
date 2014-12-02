@@ -12,6 +12,7 @@ module.exports = function(req, res, ok) {
         req.session.flash = {
             err: noRights
         }
+        
         res.redirect('session/new');
         return;
     }
