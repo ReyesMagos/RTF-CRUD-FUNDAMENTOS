@@ -61,10 +61,19 @@ module.exports = {
                 }
                 req.session.authenticated = true;
                 req.session.User = user;
+
+                if(req.session.User.admin){
+                    res.redirect('/user/list');
+                }
                 res.redirect('/user/show/' + user.id); 
             });
 
         });
 
+    }, destroy: function(req,res,next) {
+
+    	req.session.destroy();
+    	res.redirect('session/new');
+    	// body...
     }
 };

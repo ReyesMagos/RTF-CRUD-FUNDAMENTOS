@@ -16,6 +16,9 @@ module.exports = {
         lastname: {
             type: 'string',
             required: true
+        },admin:{
+            type:'string',
+            defaultsTo:false
         },
         age: {
             type: 'integer',

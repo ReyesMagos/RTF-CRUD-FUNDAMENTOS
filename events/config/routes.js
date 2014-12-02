@@ -34,11 +34,6 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  },
-  '/user/singin':{
-    controller:"UserController", action:"new"
-    //view:'user/registerform'
-  
   }
 
   /***************************************************************************

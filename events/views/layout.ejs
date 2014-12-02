@@ -4,48 +4,94 @@
     <title>Cinemas Procinal</title>
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-      <!--STYLES-->
-      <link rel="stylesheet" href="/styles/bootstrap-theme.css">
-      <link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
-      <link rel="stylesheet" href="/styles/bootstrap.css">
-      <link rel="stylesheet" href="/styles/bootstrap.min.css">
-      <link rel="stylesheet" href="/styles/importer.css">
-      <!--STYLES END-->
-    </head>
-    <body>
-      <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Procinal</a>
-          </div>
-          
-          <div class="collapse navbar-collapse navbar-ex1-collapse ">
-            <ul class="nav navbar-nav">
-              <li >
-                <a href="/">Inicio</a>
-              </li>
-              <li>
-                <a href="/user/form">Registro de Usuarios</a>
-              </li>
-              
-            </ul>
-          </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/bootstrap-theme.css">
+    <link rel="stylesheet" href="/styles/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <!--STYLES END-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cinemas Procinal</a>
         </div>
-      </nav>
-      <%- body %>
-      
-      <!--SCRIPTS-->
-      <script src="/js/dependencies/sails.io.js"></script>
-      <script src="/js/dependencies/jquery.js"></script>
-      <script src="/js/bootstrap.js"></script>
-      <script src="/js/bootstrap.min.js"></script>
-      <!--SCRIPTS END-->
-    </body>
-  </html>
+        
+        <div class="collapse navbar-collapse navbar-ex1-collapse ">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="/user/new/">Registro de Usuarios</a>
+            </li>
+            <% if(session.authenticated && session.User.admin==true){ %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario<strong class="caret"></strong></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="/user/list/">Ver Usuarios</a>
+                </li>
+              </ul>
+            </li>
+            <%} else if (session.authenticated){%>
+            <li>
+              <a href="/user/show/<%=session.User.id%>">Perfil</a>
+            </li>
+            <%}%>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Peliculas<strong class="caret"></strong></a>
+              <ul class="dropdown-menu">
+                <%if(session.authenticated && session.User.admin==true){ %>
+                <li>
+                  <a href="/movie/new/">Registrar Pelicula</a>
+                </li>
+                <li>
+                  <a href="/movie/index/">Ver Peliculas</a>
+                </li>
+                 <%} else if (session.authenticated){%>
+                <li>
+                  <a href="/movie/index/">Ver Peliculas</a>
+                </li>
+                <%}%>
+              </ul>
+            </li>
+            
+          </ul>
+          <div class="navbar-right">
+            <% if(session.authenticated){ %>
+            <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy/">cerrar session</a>
+            <%}%>
+          </div>
+          <% if(!session.authenticated){ %>
+          <form class="navbar-form navbar-right" action="/session/create">
+            <div class="form-group">
+              <input type="text" placeholder="Usuario" name="username" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="password"  name="password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sing in</button>
+            <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+          </form>
+          <%}%>
+        </div>
+      </div>
+    </nav>
+    <%- body %>
+    
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/dependencies/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+</html>

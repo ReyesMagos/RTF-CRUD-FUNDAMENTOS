@@ -3,6 +3,7 @@
 		<th>Pelicula</th>
 		<th>Pais</th>
 		<th>Clasificacion</th>
+		<th>Image</th>
 		<th></th>
 		<th></th>
 		<% _.each(movies, function(movie) { %>
@@ -10,16 +11,20 @@
 			<td><%=movie.title%></td>
 			<td><%=movie.country%></td>
 			<td><%=movie.clasification%></td>
+			<td><img alt="240x240" class="text-center" src="http://lorempixel.com/140/140/" /></td>
 			<td>
 				<a href="/movie/show/<%= movie.id %>" class="btn btn-sm btn-primary">Ver</a>
 			</td>
+			<% if(user && user.admin==true){%>
+
 			<td>
-				<form action="/contacto/destroy/<%= movie.id%>" method="POST" accept-charset="utf-8">
+				<form action="/movie/destroy/<%=movie.id%>" method="POST" accept-charset="utf-8">
 					<input type="hidden" name="_method" value="delete"/>
 					<input type="submit"  class="btn btn-sm btn-danger" value="Delete"/>
 					<input type="hidden" name="_csrf" value="<%= _csrf %>"/>
 				</form>
 			</td>
+			<%}%>
 		</tr>
 		<%})%>
 	</table>

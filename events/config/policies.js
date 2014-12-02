@@ -26,7 +26,18 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-   '*': 'flash'
+   '*': 'flash',
+   user:{
+    'new':"flash",
+    create:"flash",
+    show:'userCanSeeProfile',
+    '*':"admin"
+   }, movie:{
+    index:'authenticated',
+    'new':'userCanCreateMovies',
+    edit:'userCanCreateMovies',
+    '*':'admin'
+   }
 
   /***************************************************************************
   *                                                                          *

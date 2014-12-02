@@ -1,0 +1,55 @@
+<div class="container">
+    <form action="/movie/update/<%=movie.id%>" enctype="multipart/form-data" method="POST" class="form-signin">
+        <% if(flash && flash.err) { %>
+        <ul class="alert alert-success">
+            <% Object.keys(flash.err).forEach(function(error){ %>
+            <li> <%- JSON.stringify(flash.err[error]) %></li>
+            <% }) %>
+        </ul>
+        <% } %>
+        <legend>Registro de Peliculas</legend>
+        <div class="form-group">
+            <label for="title">Titulo</label>
+            <input class="form-control" type="text" name="title" value="<%=movie.title%>" placeholder="Titulo" required>
+        </div>
+        <div class="form-group">
+            <label for="synopsis">Sinopsis</label>
+            <textarea class="form-control" name="synopsis" placeholder="Sinopsis"  rows="5" required><%=movie.synopsis%></textarea>
+        </div>
+        <div class="form-group">
+            <label for="releseDate">Fecha de Estreno</label>
+            <input  class="form-control" type="date" name="releaseDate" value="<%=movie.releaseDate%>"  id="releaseDate" placeholder="Fecha de Lanzamiento" required>
+        </div>
+        <div class="form-group">
+            <label for="director">Director</label>
+            <input  class="form-control" name="director" value="<%=movie.director%>"  placeholder="Director" type"text"  required>
+        </div>
+        <div class="form-group">
+            <label for="country">Pais</label>
+            <input  class="form-control" name="country"  value="<%=movie.country%>"  type="text" placeholder="Pais" min="12" max="70" required>
+        </div>
+        <div class="form-group">
+            <label for="clasification">Clasificacion</label>
+            <input class="form-control" name="clasification" value="<%=movie.synopsis%>"  type="text" placeholder="Clasificacion" required>
+        </div>
+        <div class="form-group">
+            <label for="clasification">Casting</label>
+            <% movie.casting.forEach(function(casting) {%>
+            <input type="text" name="casting"   class="form-control" value="<%= casting%>">
+            <%})%>
+        </div>
+        <!--
+        <div class="form-group">
+            <label for="moviePoster">Casting</label>
+            <input type="file" id="moviePoster" name="moviePoster" />
+        </div>
+        -->
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Guardar</button>
+            <input type="hidden" name="_csrf" value="<%=_csrf %>"/>
+        </div>
+    </form>
+    
+</div>
+</div>

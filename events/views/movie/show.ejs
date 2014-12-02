@@ -41,6 +41,9 @@
 					</p>
 				</li>
 			</ol>
+			<%if(user && user.admin==true){%>
+			<a href="/movie/edit/<%= movie.id %>" class="btn btn-large btn-primary">Editar</a>
+		<%}%>
 		</div>
 		<div class="col-md-4 column">
 		<br>
@@ -48,5 +51,6 @@
 		<br>
 			<img alt="240x240" class="pull-right" src="http://lorempixel.com/140/140/" />
 		</div>
+
 	</div>
 </div>
